@@ -4,6 +4,8 @@ from sklearn.naive_bayes import MultinomialNB
 import json
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+import spacy.cli
+spacy.cli.download("pt_core_news_sm")
 
 nlp = spacy.load("pt_core_news_sm")
 
