@@ -2,7 +2,7 @@ import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 nlp = spacy.load("pt_core_news_sm")
@@ -37,8 +37,12 @@ def get_response(user_input):
 
     return respostas[prediction[0]]
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='view')
 CORS(app)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():
